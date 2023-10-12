@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'jpa-test'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation ("org.hibernate:hibernate-entitymanager:5.6.7.Final")
+    implementation 'com.h2database:h2:2.2.220'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.3'
+}
+
+test {
+    useJUnitPlatform()
+}
