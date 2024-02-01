@@ -17,6 +17,11 @@ public class Member {
     public Member() {
     }
 
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
     public Long getId() {
         return id;
     }
@@ -35,6 +40,14 @@ public class Member {
 
     public int getAge() {
         return age;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public void setAge(int age) {

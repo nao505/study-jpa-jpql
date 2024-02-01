@@ -1,5 +1,6 @@
 import jpql.Member;
 import jpql.MemberDTO;
+import jpql.Team;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,25 +13,24 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setUserName("member" + i);
-                member.setAge(i);
-                em.persist(member);
-            }
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUserName("member1");
+            member.setAge(10);
+            member.setTeam(team);
+
+
+            em.persist(member);
 
             em.flush();
             em.clear();
             // desc == 역순
-            List<Member> resultList = em.createQuery("select m from Member m order by m.age desc", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(10)
+            String query = "select m from Member m inner join m.team t";
+            List<Member> resultList = em.createQuery(query, Member.class)
                     .getResultList();
-            System.out.println("resultList.size() = " + resultList.size());
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1);
-            }
-
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();

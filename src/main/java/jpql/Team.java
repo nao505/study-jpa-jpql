@@ -21,6 +21,10 @@ public class Team {
 
     }
 
+    public List<Member> getMembers() {
+        return members;
+    }
+
     public Long getId() {
         return id;
     }
